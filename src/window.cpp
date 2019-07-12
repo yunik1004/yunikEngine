@@ -13,7 +13,7 @@ namespace yunikEngine {
         }
     }
 
-    bool Window::createWindow (int width, int height, std::string title) {
+    bool Window::createWindow (const int& width, const int& height, const std::string& title) {
         window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
         if (window == nullptr) {
             fprintf_s(stderr, "GLFW error: Failed to create window\n");

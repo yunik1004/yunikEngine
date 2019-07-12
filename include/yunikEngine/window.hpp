@@ -10,7 +10,7 @@ namespace yunikEngine {
     public:
         ~Window (void);
 
-        bool createWindow (int width, int height, std::string title);
+        bool createWindow (const int& width, const int& height, const std::string& title);
 
         void render (void);
 

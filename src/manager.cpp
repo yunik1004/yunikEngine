@@ -14,7 +14,7 @@ namespace yunikEngine {
         Window::deinit();
     }
 
-    void Manager::setGlVersion (int major, int minor) {
+    void Manager::setGlVersion (const int& major, const int& minor) {
         gl_major = major;
         gl_minor = minor;
     }

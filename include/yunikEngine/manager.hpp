@@ -6,7 +6,7 @@ namespace yunikEngine {
         static bool init (void);
         static void deinit (void);
 
-        static void setGlVersion (int major, int minor);
+        static void setGlVersion (const int& major, const int& minor);
         static void getGlVersion (int& major, int& minor);
 
     private:
