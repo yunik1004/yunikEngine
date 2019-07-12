@@ -7,7 +7,7 @@ PROJECT (yunikEngine)
 SET (YUNIKENGINE_BUILD_TARGET_SHARED "yunikEngine_shared")
 SET (YUNIKENGINE_BUILD_TARGET_STATIC "yunikEngine_static")
 
-OPTION (YUNIKENGINE_BUILD_SHARED "Build the shared library" ON)
+OPTION (YUNIKENGINE_BUILD_SHARED "Build the shared library" OFF)
 OPTION (YUNIKENGINE_BUILD_STATIC "Build the static library" ON)
 OPTION (YUNIKENGINE_BUILD_TEST "Build the test example" OFF)
 
