@@ -12,25 +12,25 @@ namespace yunikEngine {
         }
     }
 
-    bool Shader::load (const std::string& shaderSrc, const ShaderType& shaderType) {
+    bool Shader::load (const std::string& shaderSrc, const Shader::Type& shaderType) {
         GLenum stype;
         switch (shaderType) {
-            case ShaderType::COMPUTE_SHADER:
+            case Type::COMPUTE_SHADER:
                 stype = GL_COMPUTE_SHADER;
                 break;
-            case ShaderType::VERTEX_SHADER:
+            case Type::VERTEX_SHADER:
                 stype = GL_VERTEX_SHADER;
                 break;
-            case ShaderType::TESS_CONTROL_SHADER:
+            case Type::TESS_CONTROL_SHADER:
                 stype = GL_TESS_CONTROL_SHADER;
                 break;
-            case ShaderType::TESS_EVALUATION_SHADER:
+            case Type::TESS_EVALUATION_SHADER:
                 stype = GL_TESS_EVALUATION_SHADER;
                 break;
-            case ShaderType::GEOMETRY_SHADER:
+            case Type::GEOMETRY_SHADER:
                 stype = GL_GEOMETRY_SHADER;
                 break;
-            case ShaderType::FRAGMENT_SHADER:
+            case Type::FRAGMENT_SHADER:
                 stype = GL_FRAGMENT_SHADER;
                 break;
         }

@@ -3,22 +3,22 @@
 #include <string>
 
 namespace yunikEngine {
-    enum class ShaderType {
-        COMPUTE_SHADER,
-        VERTEX_SHADER,
-        TESS_CONTROL_SHADER,
-        TESS_EVALUATION_SHADER,
-        GEOMETRY_SHADER,
-        FRAGMENT_SHADER
-    };
-
     class Shader {
     friend class ShaderProgram;
 
     public:
+        enum class Type {
+            COMPUTE_SHADER,
+            VERTEX_SHADER,
+            TESS_CONTROL_SHADER,
+            TESS_EVALUATION_SHADER,
+            GEOMETRY_SHADER,
+            FRAGMENT_SHADER
+        };
+
         ~Shader (void);
 
-        bool load (const std::string& shaderSrc, const ShaderType& shaderType);
+        bool load (const std::string& shaderSrc, const Type& shaderType);
 
     private:
         unsigned int shader = 0;
