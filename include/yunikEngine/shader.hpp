@@ -18,7 +18,7 @@ namespace yunikEngine {
 
         ~Shader (void);
 
-        bool load (const std::string& shaderSrc, const Type& shaderType);
+        bool load (const Type shaderType, const std::string& shaderSrc);
 
     private:
         unsigned int shader = 0;

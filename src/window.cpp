@@ -8,12 +8,14 @@
 
 namespace yunikEngine {
     Window::~Window (void) {
+        delete scene;
+
         if (window) {
             glfwDestroyWindow(static_cast<GLFWwindow*>(window));
         }
     }
 
-    bool Window::createWindow (const int& width, const int& height, const std::string& title) {
+    bool Window::createWindow (const int width, const int height, const std::string& title) {
         window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
         if (window == nullptr) {
             fprintf_s(stderr, "GLFW error: Failed to create window\n");
@@ -51,10 +53,28 @@ namespace yunikEngine {
         return true;
     }
 
+    void Window::setScene (Scene* newScene) {
+        delete scene;
+        scene = newScene;
+    }
+
+    void Window::deleteScene (void) {
+        delete scene;
+        scene = nullptr;
+    }
+
     void Window::render (void) {
         GLFWwindow* glWindow = static_cast<GLFWwindow*>(window);
         while (!glfwWindowShouldClose(glWindow)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            if (scene) {
+                auto newScene = scene->update();
+                if (scene != newScene) {
+                    setScene(newScene);
+                }
+            }
+
             glfwSwapBuffers(glWindow);
             glfwPollEvents();
         }

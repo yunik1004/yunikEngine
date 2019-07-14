@@ -12,7 +12,7 @@ namespace yunikEngine {
         }
     }
 
-    bool Shader::load (const std::string& shaderSrc, const Shader::Type& shaderType) {
+    bool Shader::load (const Shader::Type shaderType, const std::string& shaderSrc) {
         GLenum stype;
         switch (shaderType) {
             case Type::COMPUTE_SHADER:
