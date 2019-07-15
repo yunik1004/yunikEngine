@@ -3,9 +3,10 @@
 #include <string>
 #include <vector>
 #include <glm/glm.hpp>
-#include <yunikEngine/texture.hpp>
 
 namespace yunikEngine {
+    class Texture;
+
     struct Vertex {
         glm::vec3 m_pos;
         glm::vec2 m_tex;

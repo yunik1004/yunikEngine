@@ -5,6 +5,8 @@
 #endif
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <yunikEngine/manager.hpp>
+#include <yunikEngine/scene.hpp>
 
 namespace yunikEngine {
     Window::~Window (void) {
@@ -78,6 +80,11 @@ namespace yunikEngine {
             glfwSwapBuffers(glWindow);
             glfwPollEvents();
         }
+    }
+
+    void Window::getViewportSize (int& width, int& height) const {
+        GLFWwindow* glWindow = static_cast<GLFWwindow*>(window);
+        glfwGetWindowSize(glWindow, &width, &height);
     }
 
     bool Window::init (void) {

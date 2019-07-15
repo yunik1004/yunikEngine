@@ -7,6 +7,7 @@
 #define GLEW_STATIC
 #endif
 #include <GL/glew.h>
+#include <yunikEngine/texture.hpp>
 
 namespace yunikEngine {
     Mesh::~Mesh (void) {

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <yunikEngine/camera.hpp>
 #include <yunikEngine/manager.hpp>
 #include <yunikEngine/mesh.hpp>
 #include <yunikEngine/scene.hpp>
@@ -24,6 +25,9 @@ class testScene : public yunikEngine::Scene {
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glEnableVertexAttribArray(0);
+
         sp = new yunikEngine::ShaderProgram();
         sp->init();
 
@@ -41,6 +45,8 @@ class testScene : public yunikEngine::Scene {
 
         sp->link();
 
+        cam = new yunikEngine::Camera();
+        cam->setPos(glm::vec3(4.0f, 3.0f, 10.0f));
 /* 
         m = new yunikEngine::Mesh();
         m->load("bunny.obj");*/
@@ -53,16 +59,20 @@ class testScene : public yunikEngine::Scene {
 
         //m->render();
         sp->use();
-
-        glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
+        sp->setMat4("Projection", cam->getProjectionMatrix(getWindow()));
+        sp->setMat4("View", cam->getViewMatrix());
+        
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
-        glDisableVertexAttribArray(0);
-
         return this;
+    }
+
+    void setWindow (yunikEngine::Window* newWindow) {
+        yunikEngine::Scene::setWindow(newWindow);
+    }
+
+    yunikEngine::Window* getWindow (void) {
+        return yunikEngine::Scene::getWindow();
     }
     
     private:
@@ -70,6 +80,7 @@ class testScene : public yunikEngine::Scene {
     GLuint VBO;
 
     yunikEngine::ShaderProgram* sp;
+    yunikEngine::Camera* cam;
     //yunikEngine::Mesh* m;
 };
 
@@ -81,7 +92,10 @@ int main (void) {
     yunikEngine::Window w;
     w.createWindow(1064, 768, "Hello world!");
 
-    w.setScene(new testScene());
+    testScene* ts = new testScene();
+    ts->setWindow(&w);
+
+    w.setScene(static_cast<yunikEngine::Scene*>(ts));
 
     w.render();
 

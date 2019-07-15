@@ -1,10 +1,11 @@
 #pragma once
 
 #include <string>
-#include <yunikEngine/manager.hpp>
-#include <yunikEngine/scene.hpp>
 
 namespace yunikEngine {
+    class Manager;
+    class Scene;
+
     class Window {
     friend class Manager;
 
@@ -17,6 +18,8 @@ namespace yunikEngine {
         void deleteScene (void);
 
         void render (void);
+
+        void getViewportSize (int& width, int& height) const;
 
     private:
         static bool init (void);
