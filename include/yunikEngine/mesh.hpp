@@ -34,6 +34,7 @@ namespace yunikEngine {
         struct MeshEntry {
             ~MeshEntry (void);
 
+            unsigned int VA = 0xffffffff;
             unsigned int VB = 0xffffffff;
             unsigned int IB = 0xffffffff;
 

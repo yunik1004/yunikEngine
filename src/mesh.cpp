@@ -142,7 +142,10 @@ namespace yunikEngine {
     }
 
     void Mesh::MeshEntry::init (const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices) {
-        numIndices = indices.size();
+        numIndices = static_cast<unsigned int>(indices.size());
+
+        glGenVertexArrays(1, &VA);
+	    glBindVertexArray(VA);
 
         glGenBuffers(1, &VB);
         glBindBuffer(GL_ARRAY_BUFFER, VB);

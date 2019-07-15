@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 namespace yunikEngine {
     class Shader {
@@ -18,7 +19,8 @@ namespace yunikEngine {
 
         ~Shader (void);
 
-        bool load (const Type shaderType, const std::string& shaderSrc);
+        bool loadSource (const Type shaderType, const std::string& shaderSrc);
+        bool load (const Type shaderType, const std::string& fileName);
 
     private:
         unsigned int shader = 0;
@@ -30,10 +32,14 @@ namespace yunikEngine {
 
         bool init (void);
 
-        void attachShader (const Shader& shader) const;
+        void attachShader (const Shader& shader);
         bool link (void) const;
+
+        void use (void) const;
     
     private:
         unsigned int program = 0;
+
+        std::vector<unsigned int> shaderIDs;
     };
 }

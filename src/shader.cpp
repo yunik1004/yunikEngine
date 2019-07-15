@@ -1,5 +1,7 @@
 #include <yunikEngine/shader.hpp>
 
+#include <fstream>
+#include <sstream>
 #ifndef GLEW_STATIC
 #define GLEW_STATIC
 #endif
@@ -12,7 +14,7 @@ namespace yunikEngine {
         }
     }
 
-    bool Shader::load (const Shader::Type shaderType, const std::string& shaderSrc) {
+    bool Shader::loadSource (const Shader::Type shaderType, const std::string& shaderSrc) {
         GLenum stype;
         switch (shaderType) {
             case Type::COMPUTE_SHADER:
@@ -50,13 +52,34 @@ namespace yunikEngine {
         glCompileShader(shader);
         glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
         if (!success) {
-            GLchar infoLog[1024];
-            glGetShaderInfoLog(shader, sizeof(infoLog), nullptr, infoLog);
+            GLint infoLogLength;
+            glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLogLength);
+            
+            GLchar* infoLog = new GLchar[infoLogLength];
+            glGetShaderInfoLog(shader, infoLogLength, nullptr, infoLog);
             fprintf_s(stderr, "Shader(%d) compiling error: %s\n", stype, infoLog);
+
+            delete[] infoLog;
             return false;
         }
 
         return true;
+    }
+
+    bool Shader::load (const Shader::Type shaderType, const std::string& fileName) {
+        std::ifstream fs(fileName, std::ios::in);
+
+        std::string shaderSrc;
+
+        if (fs.is_open()) {
+            std::stringstream sstr;
+            sstr << fs.rdbuf();
+            shaderSrc = sstr.str();
+
+            fs.close();
+        }
+
+        return loadSource(shaderType, shaderSrc);
     }
 
     ShaderProgram::~ShaderProgram (void) {
@@ -72,30 +95,51 @@ namespace yunikEngine {
         }
     }
 
-    void ShaderProgram::attachShader (const Shader& shader) const {
+    void ShaderProgram::attachShader (const Shader& shader) {
         glAttachShader(program, shader.shader);
+        shaderIDs.push_back(shader.shader);
     }
 
     bool ShaderProgram::link (void) const {
         GLint success;
-        GLchar infoLog[1024];
+        bool res = true;
 
         glLinkProgram(program);
         glGetProgramiv(program, GL_LINK_STATUS, &success);
         if (!success) {
-            glGetProgramInfoLog(program, sizeof(infoLog), nullptr, infoLog);
+            GLint infoLogLength;
+            glGetShaderiv(program, GL_INFO_LOG_LENGTH, &infoLogLength);
+            GLchar* infoLog = new GLchar[infoLogLength];
+
+            glGetProgramInfoLog(program, infoLogLength, nullptr, infoLog);
             fprintf_s(stderr, "Shader program linking error: %s\n", infoLog);
-            return false;
+
+            delete[] infoLog;
+            res = false;
         }
 
         glValidateProgram(program);
         glGetProgramiv(program, GL_VALIDATE_STATUS, &success);
         if (!success) {
+            GLint infoLogLength;
+            glGetShaderiv(program, GL_INFO_LOG_LENGTH, &infoLogLength);
+            GLchar* infoLog = new GLchar[infoLogLength];
+
             glGetProgramInfoLog(program, sizeof(infoLog), nullptr, infoLog);
             fprintf_s(stderr, "Invalid shader program: %s\n", infoLog);
-            return false;
+
+            delete[] infoLog;
+            res = false;
         }
 
-        return true;
+        for (int i = 0; i < shaderIDs.size(); ++i) {
+            glDetachShader(program, shaderIDs[i]);
+        }
+
+        return res;
+    }
+
+    void ShaderProgram::use (void) const {
+        glUseProgram(program);
     }
 }
