@@ -143,39 +143,39 @@ namespace yunikEngine {
         glUseProgram(program);
     }
 
-    void ShaderProgram::setBool (const std::string& name, bool value) const {
+    void ShaderProgram::setBool (const std::string& name, const bool value) const {
         glUniform1i(glGetUniformLocation(program, name.c_str()), (int)value);
     }
 
-    void ShaderProgram::setInt (const std::string& name, int value) const {
+    void ShaderProgram::setInt (const std::string& name, const int value) const {
         glUniform1i(glGetUniformLocation(program, name.c_str()), value);
     }
 
-    void ShaderProgram::setFloat (const std::string& name, float value) const {
+    void ShaderProgram::setFloat (const std::string& name, const float value) const {
         glUniform1f(glGetUniformLocation(program, name.c_str()), value);
     }
 
-    void ShaderProgram::setVec2 (const std::string& name, glm::vec2 value) const {
+    void ShaderProgram::setVec2 (const std::string& name, const glm::vec2 value) const {
         glUniform2fv(glGetUniformLocation(program, name.c_str()), 1, &value[0]);
     }
 
-    void ShaderProgram::setVec3 (const std::string& name, glm::vec3 value) const {
+    void ShaderProgram::setVec3 (const std::string& name, const glm::vec3 value) const {
         glUniform3fv(glGetUniformLocation(program, name.c_str()), 1, &value[0]);
     }
 
-    void ShaderProgram::setVec4 (const std::string& name, glm::vec4 value) const {
+    void ShaderProgram::setVec4 (const std::string& name, const glm::vec4 value) const {
         glUniform4fv(glGetUniformLocation(program, name.c_str()), 1, &value[0]);
     }
 
-    void ShaderProgram::setMat2 (const std::string& name, glm::mat2 value) const {
+    void ShaderProgram::setMat2 (const std::string& name, const glm::mat2 value) const {
         glUniformMatrix2fv(glGetUniformLocation(program, name.c_str()), 1, GL_FALSE, &value[0][0]);
     }
 
-    void ShaderProgram::setMat3 (const std::string& name, glm::mat3 value) const {
+    void ShaderProgram::setMat3 (const std::string& name, const glm::mat3 value) const {
         glUniformMatrix3fv(glGetUniformLocation(program, name.c_str()), 1, GL_FALSE, &value[0][0]);
     }
 
-    void ShaderProgram::setMat4 (const std::string& name, glm::mat4 value) const {
+    void ShaderProgram::setMat4 (const std::string& name, const glm::mat4 value) const {
         glUniformMatrix4fv(glGetUniformLocation(program, name.c_str()), 1, GL_FALSE, &value[0][0]);
     }
 }

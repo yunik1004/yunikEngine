@@ -9,7 +9,7 @@ namespace yunikEngine {
         virtual Scene* update (void) = 0;
 
         void setWindow (Window* newWindow);
-        Window* getWindow (void);
+        Window* getWindow (void) const;
 
     private:
         Window* window = nullptr;

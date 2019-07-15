@@ -18,7 +18,7 @@ namespace yunikEngine {
         }
     }
 
-    bool Texture::load (const Type textureType, std::string& fileName) {
+    bool Texture::load (const Type textureType, const std::string& fileName) {
         image = stbi_load(fileName.c_str(), &image_width, &image_height, &image_channels, STBI_rgb_alpha);
         if (!image) {
             return false;

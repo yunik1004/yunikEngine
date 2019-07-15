@@ -46,7 +46,7 @@ class testScene : public yunikEngine::Scene {
         sp->link();
 
         cam = new yunikEngine::Camera();
-        cam->setPos(glm::vec3(4.0f, 3.0f, 10.0f));
+        cam->setPos(glm::vec3(0.0f, 0.0f, 10.0f));
 /* 
         m = new yunikEngine::Mesh();
         m->load("bunny.obj");*/

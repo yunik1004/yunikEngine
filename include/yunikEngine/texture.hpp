@@ -21,7 +21,7 @@ namespace yunikEngine {
             TEXTURE_2D_MULTISAMPLE_ARRAY
         };
 
-        bool load (const Type textureType, std::string& fileName);
+        bool load (const Type textureType, const std::string& fileName);
         void bind (const unsigned int textureUnit);
 
     private:

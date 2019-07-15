@@ -5,19 +5,19 @@
 #include <yunikEngine/window.hpp>
 
 namespace yunikEngine {
-    void Camera::setType (Type newType) {
+    void Camera::setType (const Type newType) {
         type = newType;
     }
 
-    void Camera::setZFar (float newZFar) {
+    void Camera::setZFar (const float newZFar) {
         zFar = newZFar;
     }
 
-    void Camera::setZoom (float newZoom) {
+    void Camera::setZoom (const float newZoom) {
         zoom = newZoom;
     }
 
-    void Camera::setFov (float newFov) {
+    void Camera::setFov (const float newFov) {
         fov = newFov;
     }
 

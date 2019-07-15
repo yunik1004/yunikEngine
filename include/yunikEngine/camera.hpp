@@ -12,12 +12,12 @@ namespace yunikEngine {
             PERSPECTIVE
         };
 
-        void setType (Type newType);
+        void setType (const Type newType);
 
-        void setZFar (float newZFar);
+        void setZFar (const float newZFar);
 
-        void setZoom (float newZoom); // ortho
-        void setFov (float newFov); // perspective
+        void setZoom (const float newZoom); // ortho
+        void setFov (const float newFov); // perspective
 
         glm::mat4 getProjectionMatrix (const Window* window) const;
 

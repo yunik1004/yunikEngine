@@ -7,7 +7,7 @@ namespace yunikEngine {
         window = newWindow;
     }
 
-    Window* Scene::getWindow (void) {
+    Window* Scene::getWindow (void) const {
         return window;
     }
 }
